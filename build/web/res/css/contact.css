@@ -1,0 +1,28 @@
+.custom-jumbotron{
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6) ), url('../images/gibson_acoustic_header.jpg');
+    height: 40vh;
+    width: 100%;
+}
+
+.jumbotron-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 30vh;
+}
+
+.jumbotron-title h1{
+    font-weight: bold;
+}
+
+.maps-section{
+    width: 100%;
+}
+
+.contact-info:first-child{
+    margin-top: 2.2em;
+}
+
+.contact-info{
+    margin-left: 2em;
+}

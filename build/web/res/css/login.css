@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/sign_in_back.jpg");
+  color: white;
+}
+
+.box {
+  width: 30em;
+  padding: 4em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 25px 50px rgba(255, 255, 255, 0.2);
+  border-radius: 1em;
+  background: linear-gradient(135deg,rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  text-align: center;
+  transition: 0.5s;
+  margin-top: 100px;
+}
+
+.box input[type="email"],
+.box input[type="password"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 1.2em auto;
+  text-align: center;
+  border: 2px solid white;
+  padding: 10px 10px;
+  width: 16em;
+  outline: none;
+  color: white;
+  border-radius: 1em;
+  transition: 0.25s;
+}
+
+.box h1 {
+  color: white;
+  font-weight: 500;
+}
+
+.box input[type="email"]:focus,
+.box input[type="password"]:focus {
+  width: 300px;
+  border-color: #fdac04;
+}
+
+.box input[type="submit"] {
+  border: 0;
+  background-color: #fdac04;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #fdac04;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  font-size: 1.2em;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.box input[type="submit"]:hover {
+  background: #fdac04;
+}
+
+.forgot {
+    color: #fdac04;
+}
