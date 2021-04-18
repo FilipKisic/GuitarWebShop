@@ -62,4 +62,30 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 1.5em;
     font-weight: bold;
     border-radius: 15px;
+    background-color: #FDAC04;
+}
+
+.total-price{
+    margin: 2em;
+}
+
+.sum{
+    display: inline-block;
+    font-weight: bold;
+}
+
+.btn-pay{
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 15px;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    margin-left: 1em;
+    float: right;
+}
+
+.btn-paypal{
+    background-color: #009CD9;
+    border: 1px solid #009CD9;
+    color: white;
 }

@@ -6,6 +6,7 @@
 <%@page session="true" %>
 <%@taglib uri="http://gibson.com" prefix="gibson" %>
 <% List<Item> cartItems = (List<Item>) session.getAttribute(Constants.CART);%>
+<% double totalPrice = 0; %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,14 +33,14 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <% for (int i = 0; i < cartItems.size(); i++) { %>
+                    <% for (int i = 0; i < cartItems.size(); i++) {%>
                     <div class="cart-content">
                         <div class="cart-item-image">
                             <img src="data:image/jpg;base64,<%= ImageUtils.convertBytesToBase64Image(cartItems.get(i).getImage())%>" alt="Item picture" class="img-fluid cart-image">
                         </div>
                         <div class="cart-item-details">
                             <div class="cart-item-title">
-                                <p><%= cartItems.get(i).getName() %></p>
+                                <p><%= cartItems.get(i).getName()%></p>
                             </div>
                             <div class="cart-item-price">
                                 <p><%="$" + String.format("%.2f", cartItems.get(i).getPrice())%></p>
@@ -53,7 +54,13 @@
                             <a href="../cart/?itemId=<%=i%>&remove=true" class="btn btn-warning btn-remove">Remove</a>
                         </div>
                     </div>
+                            <% totalPrice += cartItems.get(i).getPrice(); %>
                     <% }%>
+                    <div class="total-price">
+                        <h3 class="sum"><%= "Total: $" + totalPrice %></h3>
+                        <a href="#" class="btn btn-warning btn-pay btn-paypal">Pay with Paypal</a>
+                        <a href="#" class="btn btn-warning btn-pay">Pay with Cash</a>
+                    </div>
                 </div>
             </div>
         </div>
