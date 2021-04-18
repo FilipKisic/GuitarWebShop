@@ -1,17 +1,23 @@
-.custom-card{
+.custom-card {
     background-color: #272323;
     box-shadow: -10px 10px 25px rgba(0, 0, 0, 0.7);
     border-radius: 1em;
 }
 
-.custom-card-title, .custom-card-text{
+.custom-card-title, .custom-card-text {
     font-weight: bold;
 }
 
-.custom-card-text{
+.custom-card-text {
     font-size: 1.5em;
 }
 
-.custom-deck{
+.custom-deck {
     margin-bottom: 2em;
+}
+
+.custom-button {
+    border-radius: 20px;
+    font-weight: bold;
+    background-color: #FDAC04;
 }

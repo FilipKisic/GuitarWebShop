@@ -5,7 +5,6 @@ import com.gibson.services.UserService;
 import java.io.IOException;
 import java.util.Optional;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author Filip Kisic
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
     
     private final UserService userService = new UserService();
@@ -31,7 +29,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect("login.jsp");
         } else {
             session.setAttribute("username", username);
-            session.setAttribute("user", loggedUser);
+            session.setAttribute("user", loggedUser.get());
             response.sendRedirect("index.jsp");
         }
     }

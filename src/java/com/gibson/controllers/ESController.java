@@ -2,10 +2,10 @@ package com.gibson.controllers;
 
 import com.gibson.model.Item;
 import com.gibson.services.ItemService;
+import com.gibson.utils.Constants;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author Filip Kisic
  */
-@WebServlet(name = "ESController", urlPatterns = {"/showes"})
 public class ESController extends HttpServlet {
 
     private final ItemService itemService = new ItemService();
@@ -25,7 +24,7 @@ public class ESController extends HttpServlet {
             throws ServletException, IOException {
         List<Item> guitars = itemService.selectByCategory(3);
         HttpSession session = request.getSession();
-        session.setAttribute("guitars", guitars);
+        session.setAttribute(Constants.GUITAR_LIST, guitars);
         response.sendRedirect("es.jsp");
     }
 
