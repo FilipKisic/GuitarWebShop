@@ -1,11 +1,11 @@
+<%@page import="java.util.Map"%>
 <%@page import="com.gibson.utils.ImageUtils"%>
 <%@page import="com.gibson.utils.Constants"%>
 <%@page import="com.gibson.model.Item"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <%@taglib uri="http://gibson.com" prefix="gibson" %>
-<% List<Item> cartItems = (List<Item>) session.getAttribute(Constants.CART);%>
+<% Map<Item, Integer> cartItems = (Map<Item, Integer>) session.getAttribute(Constants.CART);%>
 <% double totalPrice = 0; %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,33 +33,34 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <% for (int i = 0; i < cartItems.size(); i++) {%>
+                    <% for (Item item : cartItems.keySet()) {%>
                     <div class="cart-content">
                         <div class="cart-item-image">
-                            <img src="data:image/jpg;base64,<%= ImageUtils.convertBytesToBase64Image(cartItems.get(i).getImage())%>" alt="Item picture" class="img-fluid cart-image">
+                            <img src="data:image/jpg;base64,<%= ImageUtils.convertBytesToBase64Image(item.getImage())%>" alt="Item picture" class="img-fluid cart-image">
                         </div>
                         <div class="cart-item-details">
                             <div class="cart-item-title">
-                                <p><%= cartItems.get(i).getName()%></p>
+                                <p><%= item.getName()%></p>
                             </div>
                             <div class="cart-item-price">
-                                <p><%="$" + String.format("%.2f", cartItems.get(i).getPrice())%></p>
+                                <p><%="$" + String.format("%.2f", item.getPrice())%></p>
                             </div>
                         </div>
                         <div class="cart-content-right">
                             <div class="cart-quantity">
                                 <p class="quantity-text">Quantity:</p>
-                                <input type="number" value="1" class="quantity-number">
+                                <input name="item-quantity" type="number" value="1" class="quantity-number">
                             </div>
-                            <a href="../cart/?itemId=<%=i%>&remove=true" class="btn btn-warning btn-remove">Remove</a>
+                            <a href="../cart/?itemId=<%=item.getId()%>&remove=true" class="btn btn-warning btn-remove">Remove</a>
                         </div>
                     </div>
-                            <% totalPrice += cartItems.get(i).getPrice(); %>
+                            <% totalPrice += item.getPrice(); %>
                     <% }%>
                     <div class="total-price">
                         <h3 class="sum"><%= "Total: $" + totalPrice %></h3>
+                        <a href="../history" class="btn btn-warning btn-pay">History</a>
                         <a href="#" class="btn btn-warning btn-pay btn-paypal">Pay with Paypal</a>
-                        <a href="#" class="btn btn-warning btn-pay">Pay with Cash</a>
+                        <a href="../payment" class="btn btn-warning btn-pay">Pay with Cash</a>
                     </div>
                 </div>
             </div>

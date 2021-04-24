@@ -1,5 +1,14 @@
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="com.gibson.utils.Constants"%>
+<%@page import="com.gibson.model.History"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 <%@taglib uri="http://gibson.com" prefix="gibson" %>
+<% List<History> history = (List<History>) session.getAttribute(Constants.HISTORY);%>
+<% DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy"); %>
+<% LocalDateTime currentDate = LocalDateTime.now(); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,48 +35,30 @@
             </div>
             <div class="row">
                 <div class="col-12">
+                    <% for (History item : history) {%>
+                    <% if(!currentDate.toLocalDate().equals(item.getDateOfPurchase().toLocalDate())) {%>
+                    <p class="history-date"><%= item.getDateOfPurchase().toLocalDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) %></p>
+                    <% } %>
                     <div class="cart-content">
-                        <div class="cart-item-image">
-                            <img src="res/images/Slash.png" alt="Item picture" class="img-fluid cart-image">
-                        </div>
                         <div class="cart-item-details">
                             <div class="cart-item-title">
-                                <p>Slash Gibson Les Paul Gold Top</p>
+                                <p><%= item.getItemName()%></p>
                             </div>
                             <div class="cart-item-price">
-                                <p>$ 2,999.00</p>
+                                <p><%="$" + String.format("%.2f", item.getPrice())%></p>
                             </div>
                         </div>
                         <div class="cart-content-right">
                             <div class="cart-quantity">
                                 <p class="quantity-text">Quantity:</p>
-                                <p class="quantity-number">1</p>
+                                <p class="quantity-number"><%= item.getQuantity().toString()%></p>
                             </div>
-                            <p class="purchase-details">Purchase date: 01.02.2021</p>
-                            <p class="purchase-details">Payment method: Paypal</p>
+                            <p class="purchase-details">Purchase date: <%= item.getDateOfPurchase().format(formatter)%></p>
+                            <p class="purchase-details">Payment method: <%= item.getPaymentMethod()%></p>
+                            <% currentDate = item.getDateOfPurchase(); %>
                         </div>
                     </div>
-                    <div class="cart-content">
-                        <div class="cart-item-image">
-                            <img src="res/images/1959Standard.png" alt="Item picture" class="img-fluid cart-image">
-                        </div>
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">
-                                <p>1958 Les Paul Standard Reissue</p>
-                            </div>
-                            <div class="cart-item-price">
-                                <p>$ 4,999.00</p>
-                            </div>
-                        </div>
-                        <div class="cart-content-right">
-                            <div class="cart-quantity">
-                                <p class="quantity-text">Quantity:</p>
-                                <p class="quantity-number">1</p>
-                            </div>
-                            <p class="purchase-details">Purchase date: 04.04.2021</p>
-                            <p class="purchase-details">Payment method: Cash</p>
-                        </div>
-                    </div>
+                    <% }%>
                 </div>
             </div>
         </div>

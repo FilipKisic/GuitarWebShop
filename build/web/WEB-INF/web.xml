@@ -31,6 +31,14 @@
         <servlet-name>CartController</servlet-name>
         <servlet-class>com.gibson.controllers.CartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaymentController</servlet-name>
+        <servlet-class>com.gibson.controllers.PaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryController</servlet-name>
+        <servlet-class>com.gibson.controllers.HistoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DetailsController</servlet-name>
         <url-pattern>/details/*</url-pattern>
@@ -58,6 +66,14 @@
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentController</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryController</servlet-name>
+        <url-pattern>/history</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

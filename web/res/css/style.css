@@ -36,7 +36,7 @@ body{
 }
 
 .custom-menu{
-    background-color: transparent;
+    background-color: #272323;
     border: none;
 }
 
@@ -47,7 +47,7 @@ body{
 }
 
 .custom-item:hover{
-    background-color: transparent;
+    background-color: #272323;
     color: #FDAC04;
 }
 
@@ -71,9 +71,11 @@ body{
 
 .header-button{
     margin: 1em 0em 0em 2em;
-    padding: 0.5em 1.2em;
+    padding: 0.5em 2em;
     font-size: 1.6em;
     font-weight: bold;
+    background-color: #FDAC04;
+    border-radius: 15px;
 }
 
 .carousel-custom{

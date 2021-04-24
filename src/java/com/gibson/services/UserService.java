@@ -1,5 +1,6 @@
 package com.gibson.services;
 
+import com.gibson.model.History;
 import com.gibson.model.User;
 import com.gibson.repository.UserRepository;
 import com.gibson.repository.sql.DBUserRepository;
@@ -10,7 +11,7 @@ import java.util.Optional;
  *
  * @author Filip Kisic
  */
-public class UserService extends DBUserRepository implements UserRepository{
+public class UserService extends DBUserRepository implements UserRepository {
 
     @Override
     public Optional<User> create(User user) {
@@ -45,5 +46,10 @@ public class UserService extends DBUserRepository implements UserRepository{
     @Override
     public Optional<User> authenticate(String email, String password) {
         return super.authenticate(email, password);
+    }
+    
+    @Override
+    public List<History> getUserPurchaseHistory(int userId){
+        return super.getUserPurchaseHistory(userId);
     }
 }

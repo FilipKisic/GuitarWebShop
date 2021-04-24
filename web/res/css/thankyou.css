@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/sign_in_back.jpg");
+    color: white;
+}
+
+.navbar-custom {
+    backdrop-filter: blur(5px);
+}
+
+.navbar-brand {
+    margin-left: 1em;
+    margin-right: 4em;
+}
+
+.nav-link, .navbar-text {
+    text-decoration: none;
+    color: #E6E6E6;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.nav-link {
+    margin-right: 1.8em;
+}
+
+.nav-link:hover {
+    color: #FDAC04;
+}
+.navbar-nav > .active > a {
+    color: #FDAC04;
+}
+
+.navbar-text {
+    margin-right: 1em;
+}
+
+.message {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.main-heading {   
+    font-weight: bold;
+}
+
+.message-details {
+    text-align: center;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 4em;
+}

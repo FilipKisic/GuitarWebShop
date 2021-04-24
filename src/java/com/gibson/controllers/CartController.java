@@ -4,9 +4,11 @@ import com.gibson.model.Item;
 import com.gibson.services.ItemService;
 import com.gibson.utils.Constants;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,19 +28,32 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String itemId = request.getParameter("itemId");
-        String doRemove = request.getParameter("remove");
+        String itemId = request.getParameter(Constants.ITEM_ID);
+        String doRemove = request.getParameter(Constants.REMOVE);
 
-        List<Item> cartItems = (List<Item>) session.getAttribute(Constants.CART);
-        if (cartItems == null)
-            cartItems = new ArrayList<>();
+        Map<Item, Integer> cartItems = (Map<Item, Integer>) session.getAttribute(Constants.CART);
+        if (cartItems == null) {
+            cartItems = new HashMap<>();
+        }
 
         if ("true".equals(doRemove)) {
-            cartItems.remove(Integer.parseInt(itemId));
+            Item itemToDelete = new Item();
+            Set<Item> items = cartItems.keySet();
+            for (Iterator<Item> it = items.iterator(); it.hasNext();) {
+                Item item = it.next();
+                if(item.getId() == Integer.parseInt(itemId)){
+                    itemToDelete = item;
+                    break;
+                }
+            }
+            cartItems.remove(itemToDelete);
+            System.out.println("################################ GOT HERE ID: " + itemId);
         } else {
-            Optional<Item> item = itemService.findById(Integer.parseInt(itemId));
-            if (item.isPresent() && !cartItems.contains(item)) {
-                cartItems.add(item.get());
+            if (!"0".equals(itemId)) {
+                Optional<Item> item = itemService.findById(Integer.parseInt(itemId));
+                if (item.isPresent() && !cartItems.containsKey(item)) {
+                    cartItems.put(item.get(), 1); //TODO Should replace 1 with real quantity value
+                }
             }
         }
 

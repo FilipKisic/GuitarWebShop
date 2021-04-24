@@ -26,7 +26,7 @@
                     <h1 class="header-title">Gibson Les Paul Standard 2015</h1>
                     <p class="header-description">The most versatile Standard yet, with a superbly comfortable asymmetrical
                         neck profile and easy–bending compound radius 'board.</p>
-                    <button type="button" class="btn btn-warning header-button">More info</button>
+                    <a href="showlespaul" class="btn btn-warning header-button">More info</a>
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <img src="res/images/gibson_2015_header_crop.png" class="img-fluid header-image">

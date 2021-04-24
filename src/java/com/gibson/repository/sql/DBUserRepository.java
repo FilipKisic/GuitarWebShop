@@ -1,5 +1,6 @@
 package com.gibson.repository.sql;
 
+import com.gibson.model.History;
 import com.gibson.model.User;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -23,6 +24,11 @@ public abstract class DBUserRepository {
     private static final String EMAIL = "Email";
     private static final String PASSWORD = "Pswrd";
     private static final String IS_ADMIN = "IsAdmin";
+    private static final String ITEM_NAME = "ItemName";
+    private static final String QUANTITY = "Quantity";
+    private static final String DATE = "DateOfPurchase";
+    private static final String PAYMENT_METHOD = "PaymentMethod";
+    private static final String PRICE = "Price";
 
     private static final String CREATE_USER = "{ call spCreateAppUser(?, ?, ?, ?) }";
     private static final String SELECT_USERS = "{ call spSelectUsers }";
@@ -30,6 +36,7 @@ public abstract class DBUserRepository {
     private static final String UPDATE_USER = "{ call spUpdateUser(?, ?, ?, ?) }";
     private static final String DELETE_USER = "{ call spDeleteUser(?) }";
     private static final String AUTHENTICATE = "{ call spAuthenticate(?, ?) }";
+    private static final String USER_HISTORY = "{ call spSelectUserPurchaseHistory(?) }";
 
     public Optional<User> create(User user) {
         DataSource dataSource = DataSourceSingleton.getInstace();
@@ -156,5 +163,28 @@ public abstract class DBUserRepository {
             Logger.getLogger(DBUserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Optional.empty();
+    }
+
+    public List<History> getUserPurchaseHistory(int userId) {
+        List<History> history = new ArrayList<>();
+        DataSource dataSource = DataSourceSingleton.getInstace();
+        try (Connection connection = dataSource.getConnection();
+                CallableStatement stmt = connection.prepareCall(USER_HISTORY)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    history.add(new History(
+                            rs.getString(ITEM_NAME),
+                            rs.getInt(QUANTITY),
+                            rs.getTimestamp(DATE).toLocalDateTime(),
+                            rs.getString(PAYMENT_METHOD),
+                            rs.getDouble(PRICE)
+                    ));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUserRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return history;
     }
 }

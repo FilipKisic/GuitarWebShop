@@ -2,6 +2,7 @@ package com.gibson.controllers;
 
 import com.gibson.model.User;
 import com.gibson.services.UserService;
+import com.gibson.utils.Constants;
 import java.io.IOException;
 import java.util.Optional;
 import javax.servlet.ServletException;
@@ -28,8 +29,9 @@ public class LoginController extends HttpServlet {
         if(!loggedUser.isPresent()){
             response.sendRedirect("login.jsp");
         } else {
-            session.setAttribute("username", username);
-            session.setAttribute("user", loggedUser.get());
+            session.setAttribute(Constants.USERNAME, username);
+            session.setAttribute(Constants.USER, loggedUser.get());
+            //response.sendRedirect(request.getHeader("Referer"));
             response.sendRedirect("index.jsp");
         }
     }

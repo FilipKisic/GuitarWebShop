@@ -34,5 +34,3 @@ public class LesPaulController extends HttpServlet {
         
     }
 }
-
-/* CREATE MINI FORM FOR a href ShowDetails in JSP and redirect on new special controller */
