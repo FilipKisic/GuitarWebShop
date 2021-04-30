@@ -33,6 +33,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
+                    <!<!-- Add form? -->
                     <% for (Item item : cartItems.keySet()) {%>
                     <div class="cart-content">
                         <div class="cart-item-image">

@@ -106,7 +106,7 @@ public abstract class DBItemRepository {
         DataSource dataSource = DataSourceSingleton.getInstace();
         try (Connection connection = dataSource.getConnection();
                 CallableStatement stmt = connection.prepareCall(UPDATE_ITEM)) {
-            stmt.registerOutParameter(ID, Types.INTEGER);
+            stmt.setInt(ID, item.getId());
             stmt.setString(ITEM_NAME, item.getName());
             stmt.setString(ITEM_DESCRIPTION, item.getDescription());
             stmt.setDouble(PRICE, item.getPrice());

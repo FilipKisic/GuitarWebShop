@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gibson.utils;
 
 /**
@@ -20,4 +15,7 @@ public class Constants {
     public static final String ITEM_ID = "itemId";
     public static final String REMOVE = "remove";
     public static final String HISTORY = "history";
+    public static final String ADMIN_HISTORY = "adminHistory";
+    public static final String ITEMS = "items";
+    public static final String INFO = "info";
 }

@@ -1,9 +1,12 @@
 package com.gibson.model;
 
+import lombok.Getter;
+
 /**
  *
  * @author Filip Kisic
  */
+@Getter
 public enum Category {
     LES_PAUL(1),
     SG(2),

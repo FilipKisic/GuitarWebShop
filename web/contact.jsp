@@ -1,5 +1,8 @@
+<%@page import="com.gibson.model.User"%>
+<%@page import="com.gibson.utils.Constants"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://gibson.com" prefix="gibson" %>
+<% User user = (User) (session.getAttribute(Constants.USER)); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +20,11 @@
     </head>
 
     <body>
+        <% if (user != null && user.isAdmin()) {%>
+        <gibson:NavBar active="adminContact" />
+        <% } else {%>
         <gibson:NavBar active="contact" />
+        <% }%>
         <div class="jumbotron custom-jumbotron">
             <div class="jumbotron-title">
                 <h1>Do you have any questions?</h1>

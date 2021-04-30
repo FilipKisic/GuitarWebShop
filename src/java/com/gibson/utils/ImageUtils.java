@@ -3,6 +3,7 @@ package com.gibson.utils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
 
 /**
@@ -26,5 +27,14 @@ public class ImageUtils {
         inputStream.close();
         outputStream.close();
         return base64Image;
+    }
+
+    public static byte[] convertInputStreamToByteArray(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[10240];
+        for (int length = 0; (length = inputStream.read(buffer)) > 0;) {
+            output.write(buffer, 0, length);
+        }
+        return output.toByteArray();
     }
 }

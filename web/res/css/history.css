@@ -8,6 +8,7 @@
     border-radius: 25px;
     -webkit-box-shadow: -8px 5px 15px 4px rgba(0,0,0,0.5); 
     box-shadow: -8px 5px 15px 4px rgba(0,0,0,0.5);
+    min-height: 13em;
 }
 
 .cart-image{
@@ -55,4 +56,25 @@
     font-size: 2em;
     font-weight: bold;
     color: #FDAC04;
+}
+
+.filter-part{
+    margin-top: 2em;
+}
+
+.filter-part > *{
+    display: inline;
+    white-space: nowrap;
+}
+
+.custom-input{
+    margin-left: 1em;
+    width: 15em;
+    vertical-align: text-bottom;
+}
+
+.custom-submit{
+    margin-left: 1em;
+    font-weight: bold;
+    padding: 0.5em 2em;
 }

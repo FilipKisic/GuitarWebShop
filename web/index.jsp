@@ -1,8 +1,9 @@
+<%@page import="com.gibson.utils.Constants"%>
 <%@page import="com.gibson.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
 <%@taglib uri="http://gibson.com" prefix="gibson" %>
-<% User user = (User) (session.getAttribute("user")); %>
+<% User user = (User) (session.getAttribute(Constants.USER)); %>
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +20,11 @@
     </head>
 
     <body>
+        <% if (user != null && user.isAdmin()) {%>
+        <gibson:NavBar active="adminIndex" />
+        <% } else {%>
         <gibson:NavBar active="index" />
+        <% }%>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-sm-12">

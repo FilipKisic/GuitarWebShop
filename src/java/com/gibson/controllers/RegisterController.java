@@ -2,6 +2,7 @@ package com.gibson.controllers;
 
 import com.gibson.model.User;
 import com.gibson.services.UserService;
+import com.gibson.utils.ConnectionUtils;
 import com.gibson.utils.Constants;
 import java.io.IOException;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public class RegisterController extends HttpServlet {
                 Optional<User> loggedUser = userService.create(new User(email, password, false));
                 session.setAttribute(Constants.USERNAME, username);
                 session.setAttribute(Constants.USER, loggedUser);
+                ConnectionUtils.createConnectionInfo(request, username);
                 response.sendRedirect("index.jsp");
             }
         }

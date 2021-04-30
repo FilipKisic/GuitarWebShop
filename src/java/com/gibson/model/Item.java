@@ -1,7 +1,6 @@
 package com.gibson.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +18,6 @@ public class Item extends BaseEntity{
     private double price;
     private byte[] image;
     private int categoryId;
-    private String base64Image;
 
     public Item(int id, String name, String description, double price, byte[] image, int categoryId) {
         super(id);
