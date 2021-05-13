@@ -21,6 +21,8 @@
         <link rel="stylesheet" href="../res/css/font.css">
         <link rel="stylesheet" href="../res/css/cart.css">
         <link rel="icon" type="image/png" href="../res/icons/favicon-16x16.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     </head>
 
     <body>
@@ -55,12 +57,12 @@
                             <a href="../cart/?itemId=<%=item.getId()%>&remove=true" class="btn btn-warning btn-remove">Remove</a>
                         </div>
                     </div>
-                            <% totalPrice += item.getPrice(); %>
+                    <% totalPrice += item.getPrice(); %>
                     <% }%>
                     <div class="total-price">
-                        <h3 class="sum"><%= "Total: $" + totalPrice %></h3>
+                        <h3 class="sum"><%= "Total: $" + totalPrice%></h3>
+                        <div class="btn-paypal" id="paypal-button-container"></div>
                         <a href="../history" class="btn btn-warning btn-pay">History</a>
-                        <a href="#" class="btn btn-warning btn-pay btn-paypal">Pay with Paypal</a>
                         <a href="../payment" class="btn btn-warning btn-pay">Pay with Cash</a>
                     </div>
                 </div>
@@ -77,6 +79,27 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/5c499144e7.js" crossorigin="anonymous"></script>
+        <script
+            src="https://www.paypal.com/sdk/js?client-id=AeffotGCwrDZUngxcZ4Tpg_lyP8dq3yItYM0JcqibnkYQrOeYgZn9f6JTWG6YcmQFUa2PC_O6PcYKQJl">
+        </script>
+        <script>
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                                amount: {
+                                    value: '<%=totalPrice%>'
+                                }
+                            }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+                    });
+                }
+            }).render("#paypal-button-container");
+        </script>
     </body>
 
 </html>

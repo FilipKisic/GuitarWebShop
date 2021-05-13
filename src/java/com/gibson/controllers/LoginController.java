@@ -1,13 +1,10 @@
 package com.gibson.controllers;
 
-import com.gibson.model.ConnectionInfo;
 import com.gibson.model.User;
-import com.gibson.services.InfoService;
 import com.gibson.services.UserService;
 import com.gibson.utils.ConnectionUtils;
 import com.gibson.utils.Constants;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

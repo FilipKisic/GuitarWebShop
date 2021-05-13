@@ -6,7 +6,6 @@ import com.gibson.utils.Constants;
 import com.gibson.utils.ImageUtils;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.ServletException;
@@ -56,21 +55,25 @@ public class CrudController extends HttpServlet {
             response.sendRedirect("adminCrud.jsp");
         } else {
             if (button.equals("create")) {
-                if (isValid()){
+                if (isValid()) {
                     InputStream fileContent = guitarImage.getInputStream();
-                    byte[] image = ImageUtils.convertInputStreamToByteArray(fileContent);
-                    itemService.create(new Item(guitarName, guitarDescription, Double.parseDouble(guitarPrice), image, Integer.parseInt(guitarCategory)));
+                    if (fileContent != null) {
+                        byte[] image = ImageUtils.convertInputStreamToByteArray(fileContent);
+                        itemService.create(new Item(guitarName, guitarDescription, Double.parseDouble(guitarPrice), image, Integer.parseInt(guitarCategory)));
+                    }
                 }
             }
             if (button.equals("update")) {
                 if (selectedItem.isPresent() && isValid()) {
                     InputStream fileContent = guitarImage.getInputStream();
-                    byte[] image = ImageUtils.convertInputStreamToByteArray(fileContent);
-                    itemService.update(new Item(selectedItem.get().getId(),guitarName, guitarDescription, Double.parseDouble(guitarPrice), image, Integer.parseInt(guitarCategory)));
+                    if (fileContent != null) {
+                        byte[] image = ImageUtils.convertInputStreamToByteArray(fileContent);
+                        itemService.update(new Item(selectedItem.get().getId(), guitarName, guitarDescription, Double.parseDouble(guitarPrice), image, Integer.parseInt(guitarCategory)));
+                    }
                 }
             }
             if (button.equals("delete")) {
-                if (selectedItem.isPresent()){
+                if (selectedItem.isPresent()) {
                     itemService.deleteById(selectedItem.get().getId());
                 }
             }
@@ -90,10 +93,18 @@ public class CrudController extends HttpServlet {
 
     private boolean isValid() {
         boolean isOkay = true;
-        if(guitarName.equals("")) isOkay = false;
-        if(guitarDescription.equals("")) isOkay = false;
-        if(guitarPrice.equals("")) isOkay = false;
-        if(guitarCategory.equals("")) isOkay = false;
+        if (guitarName.equals("")) {
+            isOkay = false;
+        }
+        if (guitarDescription.equals("")) {
+            isOkay = false;
+        }
+        if (guitarPrice.equals("")) {
+            isOkay = false;
+        }
+        if (guitarCategory.equals("")) {
+            isOkay = false;
+        }
         return isOkay;
     }
 }

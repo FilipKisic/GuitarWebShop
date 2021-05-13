@@ -45,19 +45,19 @@ public class PaymentController extends HttpServlet {
                     .totalPrice(totalPrice)
                     .paymentMethod(Constants.CASH_PAYMENT)
                     .build();
-            
+
             bill = billService.create(bill).get();
             for (Item item : billItems.keySet()) {
                 billService.addItemToBill(bill.getId(), item.getId(), billItems.get(item));
             }
             billItems.clear();
             response.sendRedirect("thankyou.jsp");
-        }
+      }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
     }
 }
