@@ -25,16 +25,31 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processPayment(request, response, Constants.CASH_PAYMENT);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String message = request.getParameter("message");
+        boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+        if (ajax) {
+            System.out.println(message);
+            processPayPal(request, response);
+        }
+    }
+
+    public void processPayPal(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        processPayment(request, response, Constants.PAYPAL_PAYMENT);
+    }
+
+    private void processPayment(HttpServletRequest request, HttpServletResponse response, String paymentMethod) throws IOException {
         HttpSession session = request.getSession();
         Double totalPrice = 0.0;
-
         Map<Item, Integer> billItems = (Map<Item, Integer>) session.getAttribute(Constants.CART);
-
         for (Item item : billItems.keySet()) {
             totalPrice += item.getPrice() * billItems.get(item);
         }
-
         User loggedInUser = (User) session.getAttribute(Constants.USER);
         if (loggedInUser == null) {
             response.sendRedirect("login.jsp");
@@ -43,7 +58,7 @@ public class PaymentController extends HttpServlet {
                     .userId(loggedInUser.getId())
                     .dateOfPurchase(LocalDateTime.now())
                     .totalPrice(totalPrice)
-                    .paymentMethod(Constants.CASH_PAYMENT)
+                    .paymentMethod(paymentMethod)
                     .build();
 
             bill = billService.create(bill).get();
@@ -52,12 +67,6 @@ public class PaymentController extends HttpServlet {
             }
             billItems.clear();
             response.sendRedirect("thankyou.jsp");
-      }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+        }
     }
 }

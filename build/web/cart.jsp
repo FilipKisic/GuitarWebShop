@@ -1,3 +1,4 @@
+<%@page import="com.gibson.controllers.PaymentController"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.gibson.utils.ImageUtils"%>
 <%@page import="com.gibson.utils.Constants"%>
@@ -82,6 +83,7 @@
         <script
             src="https://www.paypal.com/sdk/js?client-id=AeffotGCwrDZUngxcZ4Tpg_lyP8dq3yItYM0JcqibnkYQrOeYgZn9f6JTWG6YcmQFUa2PC_O6PcYKQJl">
         </script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
             paypal.Buttons({
                 createOrder: function (data, actions) {
@@ -94,6 +96,10 @@
                     });
                 },
                 onApprove: function (data, actions) {
+                    var params = {message: "success"};
+                    $.post("${pageContext.request.contextPath}/payment", $.param(params), function (response) {
+                        console.log('Success');
+                    });
                     return actions.order.capture().then(function (details) {
                         alert('Transaction completed by ' + details.payer.name.given_name);
                     });
